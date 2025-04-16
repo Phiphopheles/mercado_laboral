@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Dashboard Principal</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card p-3 mb-3">
+            <h5>Total Proyectos</h5>
+            <p>{{ total_proyectos }}</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-3 mb-3">
+            <h5>Total Tareas</h5>
+            <p>{{ total_tareas }}</p>
+        </div>
+    </div>
+</div>
+
+<h3 class="mt-4">Últimas Tareas</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Proyecto</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+            <th>Fecha Límite</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tarea in tareas %}
+        <tr>
+            <td>{{ tarea.nombre }}</td>
+            <td>{{ tarea.proyecto.nombre }}</td>
+            <td>{{ tarea.estado }}</td>
+            <td>{{ tarea.prioridad }}</td>
+            <td>{{ tarea.fecha_limite|date:"d/m/Y" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay tareas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

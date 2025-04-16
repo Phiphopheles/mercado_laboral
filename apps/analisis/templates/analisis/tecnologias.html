@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Tendencias Tecnológicas{% endblock %}
+{% block content %}
+
+<h2 class="mb-4">Habilidades más demandadas en ofertas de empleo</h2>
+
+<canvas id="chartHabilidades" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('chartHabilidades');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                label: 'Cantidad de Ofertas',
+                data: {{ data|safe }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>📈 Análisis Mercado Laboral</h2>
+
+<canvas id="graficoPlataformas" width="400" height="200"></canvas>
+<canvas id="graficoPorFecha" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const dataPlataformas = {
+        labels: {{ resumen_por_plataforma|map(attribute="plataforma")|list|safe }},
+        datasets: [{
+            label: 'Ofertas por Plataforma',
+            data: {{ resumen_por_plataforma|map(attribute="total")|list|safe }},
+            backgroundColor: ['#347BB7', '#FFC107', '#28A745'],
+        }]
+    };
+
+    const dataFechas = {
+        labels: {{ resumen_por_fecha|map(attribute="day")|list|safe }},
+        datasets: [{
+            label: 'Ofertas por Día',
+            data: {{ resumen_por_fecha|map(attribute="count")|list|safe }},
+            backgroundColor: '#17A2B8',
+        }]
+    };
+
+    new Chart(document.getElementById('graficoPlataformas'), {
+        type: 'bar',
+        data: dataPlataformas,
+    });
+
+    new Chart(document.getElementById('graficoPorFecha'), {
+        type: 'line',
+        data: dataFechas,
+    });
+</script>
+{% endblock %}

@@ -7,6 +7,8 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mercado_laboral.settings')
+    # Añadir la carpeta 'apps' al PYTHONPATH para permitir imports tipo 'apps.inteligencia.*'
+    sys.path.append(os.path.join(os.path.dirname(__file__), 'apps'))
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
