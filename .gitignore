@@ -1,2 +1,3 @@
 # Exclude desktop app virtualenv
 desktop_app/venv/
+venv/
